@@ -1,6 +1,8 @@
 import sys
 import locale
 import itertools
+from decimal import Decimal
+
 locale.setlocale( locale.LC_ALL, '' )
 
 
@@ -16,20 +18,24 @@ employees = [{"IDNumber" : "001", "Name" :  "Mary", "PayRate"  :  15.00, "HoursW
              {"IDNumber" : "010", "Name" :  "Ray",  "PayRate"  :  16.50, "HoursWorked"  : 80}
 ]
 
-
 for employee in employees:
     ID = employee['IDNumber']
     EmpName = employee['Name']
     hourlyWage = employee['PayRate']
     totalHours = employee['HoursWorked']
-    overtime = totalHours - 40
+    overtimeHours = totalHours - 40
+    overtimePay = overtimeHours * 1.5*hourlyWage
     if totalHours <= 40:
         totalWages = hourlyWage*totalHours
-        print(ID, EmpName, totalHours, hourlyWage, totalWages)
-    else:
+        print("ID\tName\tPayRate\t\tHoursWorked\t\tTotalPay")
+        print(ID, "\t" + EmpName,"\t" + str(hourlyWage) + "\t\t" + str(totalHours) + "\t\t\t" +  str(totalWages))
+    elif overtimeHours > 0:
         overtime = totalHours - 40
         totalWages = hourlyWage*40 + (1.5*hourlyWage)*overtime
-        print(ID, EmpName, totalHours, hourlyWage, overtime, totalWages)
+        print("ID\tName\tPayRate\t\tHoursWorked\t\tTotalPay\tOvertime Hours\t\tOvertime Pay")
+        print(ID, "\t" + EmpName,"\t" + str(hourlyWage) + "\t\t" + str(totalHours) + "\t\t\t" +  str(totalWages)
+              + "\t\t" + str(overtimeHours) + "\t\t\t" + str(overtimePay))
+
 
 
 
